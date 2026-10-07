@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haris | IT Student</title>
+    <style>
+        :root {
+            --bg: #0b1020;
+            --bg-soft: #121933;
+            --panel: rgba(18, 25, 51, 0.9);
+            --panel-2: #1b2540;
+            --text: #eaf2ff;
+            --muted: #a9b7d1;
+            --primary: #69d2e7;
+            --secondary: #8a7dff;
+            --accent: #6ef0b2;
+            --border: rgba(255, 255, 255, 0.08);
+            --shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #07111d, #0d1326 35%, #111a2d 100%);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1100px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(12px);
+            background: rgba(11, 16, 32, 0.7);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 72px;
+        }
+
+        .brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            color: var(--muted);
+            flex-wrap: wrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cta {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 999px;
+            font-weight: 700;
+            color: #06131c;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: var(--shadow);
+        }
+
+        .hero {
+            padding: 90px 0 60px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 8px 14px;
+            border: 1px solid rgba(105, 210, 231, 0.35);
+            border-radius: 999px;
+            color: var(--primary);
+            background: rgba(105, 210, 231, 0.08);
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: clamp(2.8rem, 5vw, 5rem);
+            line-height: 1.05;
+            margin: 18px 0 16px;
+        }
+
+        .highlight {
+            color: var(--primary);
+        }
+
+        .lead {
+            max-width: 600px;
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 28px;
+        }
+
+        .secondary-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .hero-card {
+            position: relative;
+            background: linear-gradient(180deg, rgba(19, 26, 51, 0.92), rgba(14, 20, 38, 0.9));
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 22px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .profile-glow {
+            position: absolute;
+            inset: -30% 40% auto auto;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(105, 210, 231, 0.55), transparent 60%);
+            filter: blur(20px);
+        }
+
+        .avatar {
+            position: relative;
+            width: 240px;
+            height: 240px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 3.8rem;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: #06131c;
+            font-weight: 800;
+            box-shadow: 0 20px 40px rgba(105, 210, 231, 0.35);
+        }
+
+        .mini-stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 12px 10px;
+            text-align: center;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        section {
+            padding: 38px 0;
+        }
+
+        .section-heading {
+            margin-bottom: 22px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            margin: 0 0 8px;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .about-grid,
+        .skills-grid,
+        .projects-grid,
+        .contact-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .about-grid {
+            grid-template-columns: 1.1fr 0.9fr;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .info-list {
+            display: grid;
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .info-item span:first-child {
+            color: var(--muted);
+        }
+
+        .skills-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .skill-box {
+            background: var(--panel-2);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 22px;
+        }
+
+        .skill-box h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        .pill-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pill {
+            border-radius: 999px;
+            background: rgba(138, 125, 255, 0.12);
+            color: #d8d2ff;
+            border: 1px solid rgba(138, 125, 255, 0.25);
+            padding: 8px 12px;
+            font-size: 0.86rem;
+        }
+
+        .projects-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .project-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .project-card .tag {
+            display: inline-block;
+            margin-bottom: 12px;
+            color: var(--accent);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .project-card h3 {
+            margin: 0 0 12px;
+            font-size: 1.35rem;
+        }
+
+        .project-card p {
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        .link-arrow {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .contact-grid {
+            grid-template-columns: 1.1fr 0.9fr;
+        }
+
+        .contact-list {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .contact-item {
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        form {
+            display: grid;
+            gap: 14px;
+        }
+
+        input, textarea {
+            width: 100%;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text);
+            border-radius: 12px;
+            padding: 14px 16px;
+            font: inherit;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            border: none;
+            border-radius: 12px;
+            padding: 14px 18px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #06131c;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        footer {
+            padding: 22px 0 44px;
+            color: var(--muted);
+            text-align: center;
+            border-top: 1px solid var(--border);
+            margin-top: 24px;
+        }
+
+        @media (max-width: 860px) {
+            .hero-grid,
+            .about-grid,
+            .contact-grid,
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="brand">Haris</div>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                    <a class="cta" href="#contact">Hire Me</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <span class="eyebrow">IT Student</span>
+                    <h1>Hello, I'm <span class="highlight">Haris</span></h1>
+                    <p class="lead">
+                        I’m a passionate male IT student who loves building smart digital solutions,
+                        learning modern technologies, and turning ideas into real-world products.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="cta" href="#projects">View Projects</a>
+                        <a class="secondary-btn" href="#about">About Me</a>
+                    </div>
+                </div>
+
+                <div class="hero-card">
+                    <div class="profile-glow"></div>
+                    <div class="avatar">H</div>
+                    <div class="mini-stats">
+                        <div class="stat">
+                            <strong>2+</strong>
+                            Years Learning
+                        </div>
+                        <div class="stat">
+                            <strong>8</strong>
+                            Skills
+                        </div>
+                        <div class="stat">
+                            <strong>5</strong>
+                            Projects
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>About Me</h2>
+                    <p>I enjoy creating, learning, and solving problems in the world of technology.</p>
+                </div>
+
+                <div class="about-grid">
+                    <div class="card">
+                        <p>
+                            I am a dedicated IT student with a strong interest in software development,
+                            web design, and computer systems. I enjoy exploring how technology can improve
+                            daily life and solve practical challenges.
+                        </p>
+                        <p>
+                            My goal is to become a skilled developer who builds useful, user-friendly digital
+                            experiences. I am constantly improving my skills in coding, design, problem-solving,
+                            and teamwork.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Quick Info</h3>
+                        <div class="info-list">
+                            <div class="info-item"><span>Name</span><strong>Haris</strong></div>
+                            <div class="info-item"><span>Field</span><strong>Information Technology</strong></div>
+                            <div class="info-item"><span>Study Level</span><strong>Student</strong></div>
+                            <div class="info-item"><span>Focus</span><strong>Web & Software</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Skills</h2>
+                    <p>Tools and technologies I am learning and using.</p>
+                </div>
+
+                <div class="skills-grid">
+                    <div class="skill-box">
+                        <h3>Frontend</h3>
+                        <div class="pill-group">
+                            <span class="pill">HTML</span>
+                            <span class="pill">CSS</span>
+                            <span class="pill">JavaScript</span>
+                            <span class="pill">Responsive Design</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-box">
+                        <h3>Programming</h3>
+                        <div class="pill-group">
+                            <span class="pill">Python</span>
+                            <span class="pill">C++</span>
+                            <span class="pill">Java</span>
+                            <span class="pill">OOP</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-box">
+                        <h3>Other</h3>
+                        <div class="pill-group">
+                            <span class="pill">Git</span>
+                            <span class="pill">UI/UX</span>
+                            <span class="pill">Problem Solving</span>
+                            <span class="pill">Teamwork</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Projects</h2>
+                    <p>Some of the work I’ve built while developing my skills.</p>
+                </div>
+
+                <div class="projects-grid">
+                    <article class="project-card">
+                        <div class="tag">Web</div>
+                        <h3>Student Portfolio</h3>
+                        <p>A personal portfolio website designed to present my profile, skills, and projects.</p>
+                        <a href="#" class="link-arrow">View Project →</a>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="tag">App</div>
+                        <h3>Task Manager</h3>
+                        <p>A simple productivity app for organizing daily tasks and improving efficiency.</p>
+                        <a href="#" class="link-arrow">View Project →</a>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="tag">System</div>
+                        <h3>Inventory Dashboard</h3>
+                        <p>A data-focused dashboard for tracking items, stock levels, and basic reports.</p>
+                        <a href="#" class="link-arrow">View Project →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Contact</h2>
+                    <p>Let’s connect and work on something meaningful.</p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="card">
+                        <h3>Get in Touch</h3>
+                        <div class="contact-list">
+                            <div class="contact-item">Email: haris.student@example.com</div>
+                            <div class="contact-item">Phone: +123 456 7890</div>
+                            <div class="contact-item">Location: City, Country</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <form>
+                            <input type="text" placeholder="Your Name" aria-label="Your Name">
+                            <input type="email" placeholder="Your Email" aria-label="Your Email">
+                            <textarea placeholder="Your Message" aria-label="Your Message"></textarea>
+                            <button type="submit">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">© 2026 Haris | IT Student</div>
+    </footer>
+</body>
+</html>
